@@ -74,7 +74,7 @@ export default {
   min-height: 100vh;
   &.dark {
     color: $dark-text;
-    background-color: $dark-background;
+    background-color: $dark-background;    
     #nav, button, input, .card, ul {
       background-color: $dark-elements;
       color: $dark-text;
@@ -83,7 +83,7 @@ export default {
     input:focus {
       border: 2px solid $dark-text;
     }
-    input::placeholder, input:focus, footer p svg {
+    input::placeholder, input:focus, footer p svg, .loading {
       color: $dark-text;
     }
     .card ul, .country-info-meta ul {
