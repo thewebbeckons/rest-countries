@@ -2,13 +2,17 @@
   <div id="nav">
     <div>
       <h1 class="nav-item">Where in the world?</h1>
-      <a class="nav-item" @click="toggle()"><font-awesome-icon :icon="['far', 'moon']" />Dark Mode</a>
+      <a v-if="theme === 'light'" class="nav-item" @click="toggle()"><font-awesome-icon :icon="['far', 'moon']" />Dark Mode</a>
+      <a v-else class="nav-item" @click="toggle()"><font-awesome-icon :icon="['fas', 'moon']" />Light Mode</a>
     </div>
   </div>
 </template>
 
 <script>
 export default {
+  props: [
+    'theme'
+  ],  
   methods: {
     toggle () {
       this.$emit('toggle-theme')
@@ -59,7 +63,7 @@ export default {
 // Tablet Media Query
 @media screen and (max-width: 1440px) {  
   #nav div {
-    padding: 3rem 2rem;
+    padding: 2rem 2rem;
     h1 {
       font-size: 1.6rem;
     }

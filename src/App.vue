@@ -1,6 +1,6 @@
 <template>
   <div id="app" :class="{dark: theme === 'dark'}">
-    <Nav @toggle-theme="toggleTheme" />
+    <Nav :theme="theme" @toggle-theme="toggleTheme" />
     <div class="container">
       <router-view/>
       <footer>
