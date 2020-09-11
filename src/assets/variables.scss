@@ -1,0 +1,25 @@
+// Variables
+ 
+$dark-elements: hsl(209, 23%, 22%);
+$dark-background: hsl(207, 26%, 17%);
+$light-text: hsl(200, 15%, 8%);
+$light-input: hsl(0, 0%, 52%);
+$light-background: hsl(0, 0%, 98%);
+$dark-text: hsl(0, 0%, 100%);
+$light-elements: hsl(0, 0%, 100%);
+
+// radius
+$radius: 5px;
+$box-shadow: 0 0 15px darken($light-background, 10%);
+
+// breakpoints 
+$mobile: 375px;
+$desktop: 1440px;
+
+// Typography
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;600;800');
+
+$font: 'Nunito Sans', sans-serif;
+$home-size: 14px;
+$detail-size: 16px;
+
