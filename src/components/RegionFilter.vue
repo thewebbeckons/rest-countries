@@ -1,15 +1,21 @@
 <template>
   <div class="region-filter">
-    <button @click="toggle()" id="filter-button" :class="{ active: showList }">
+    <button v-if="!currentRegion" @click="toggle()" id="filter-button" :class="{ active: showList }">
       Filter by Region <font-awesome-icon :icon="['fas', 'chevron-down']" />
     </button>
+    <button v-else @click="removeFilter()">
+      Showing {{ currentRegion }} <font-awesome-icon :icon="['fas', 'times']" />
+    </button>
     <transition name="slide">
-      <ul v-show="showList" id="region-list">
-        <li>Africa</li>
-        <li>America</li>
-        <li>Asia</li>
-        <li>Europe</li>
-        <li>Oceania</li>
+      <ul v-show="showList"  id="region-list">
+        <li 
+          v-for="region in regions" 
+          :id="region" 
+          :key="region"
+          @click="filterRegion(region)"
+        >
+          {{ region }}
+        </li>
       </ul>
     </transition>
   </div>
@@ -23,21 +29,30 @@ export default {
   },
   data () {
     return {
-      showList: false
+      showList: false,
+      currentRegion: null
     }
   },
   mounted () {
     this.setWidth()
   },
   methods: {
-    setWidth() {
+    setWidth () {
       const el = document.getElementById('filter-button')
-      let width = el.clientWidth
-      console.log(width)
-      document.getElementById('region-list').style.width = `calc(${width}px - 2rem)`
+      let width = el.offsetWidth
+      document.getElementById('region-list').style.width = `${width}px`
     },
-    toggle() {
+    toggle () {
       this.showList = !this.showList
+    },    
+    filterRegion (region) {
+      this.$emit('filter-region', region)
+      this.currentRegion = region      
+      this.showList = !this.showList
+    },
+    removeFilter () {
+      this.$emit('remove-filter')
+      this.currentRegion = null
     }
   }
 }
@@ -80,7 +95,10 @@ export default {
     font-family: $font;
     border-radius: $radius;
     font-weight: 600;
-    transition: all 0.25s ease;
+    transition: all 0.25s ease;          
+    box-shadow: $box-shadow;
+    cursor: pointer;
+    z-index:1;
     li {
       padding: 0.5rem 0;
     }

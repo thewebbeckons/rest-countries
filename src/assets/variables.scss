@@ -10,7 +10,8 @@ $light-elements: hsl(0, 0%, 100%);
 
 // radius
 $radius: 5px;
-$box-shadow: 0 0 15px darken($light-background, 10%);
+$box-shadow: 0 0 5px darken($light-background, 2%);
+$dark-box-shadow: 0 0 5px darken($dark-background, 2%);
 
 // breakpoints 
 $mobile: 375px;

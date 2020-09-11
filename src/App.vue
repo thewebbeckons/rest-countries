@@ -1,25 +1,70 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <div class="nav">
-        <h1 class="nav-item">Where in the world?</h1>
-        <a class="nav-item"><font-awesome-icon :icon="['far', 'moon']" />Dark Mode</a>
-      </div>
-    </div>
-    <router-view/>
-    <footer>
-      <p>Made with <font-awesome-icon :icon="['fas', 'heart']" style="color: red;" /> in Toronto |
-      <a href="https://github.com/thewebbeckons"><font-awesome-icon :icon="['fab', 'github']" /></a></p>
-    </footer>
+  <div id="app" :class="{dark: theme === 'dark'}">
+    <Nav @toggle-theme="toggleTheme" />
+    <div class="container">
+      <router-view/>
+      <footer>
+        <p>Made with <font-awesome-icon :icon="['fas', 'heart']" style="color: red;" /> in Toronto | Coded by &nbsp;
+        <a href="https://github.com/thewebbeckons"><font-awesome-icon :icon="['fab', 'github']" /></a></p>
+      </footer>
+    </div>    
   </div>
 </template>
+
+<script>
+import Nav from '@/components/Nav.vue'
+
+export default {
+  components: {
+    Nav
+  },
+  data () {
+    return {
+      theme: 'light'
+    }
+  },
+  mounted () {
+    if (localStorage.theme) {
+      this.theme = localStorage.theme
+    } else {
+      localStorage.theme = this.theme
+    }
+  },
+  methods: {
+    toggleTheme () {
+      if (this.theme === 'light') {
+        this.theme = 'dark'
+        localStorage.theme = this.theme
+      } else {
+        this.theme = 'light'
+        localStorage.theme = this.theme
+      }
+    }
+  }
+}
+</script>
 
 <style lang="scss">
 * {
   margin: 0;
   padding: 0;
   outline: none;
+  -webkit-box-sizing: border-box; 
+  -moz-box-sizing: border-box; 
+  box-sizing: border-box;
 }
+// container css
+.container {
+  max-width: 1400px;
+  margin-right: auto;
+  margin-left:  auto;
+  padding-right: 20px;
+  padding-left:  20px;
+}
+#nav + .container {
+  padding-top: calc(3rem + 6vh);
+}
+// App Style
 #app {
   font-family: 'Nunito Sans', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -27,86 +72,53 @@
   color: $light-text;
   background-color: $light-background;
   min-height: 100vh;
-}
-#nav {
-  position: fixed;
-  width: 100%;
-  top:0;
-  box-shadow: 0 0 15px darken($light-background, 10%);
-  background-color: $light-elements;
-  .nav {
-    display:flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: space-between;
-    align-items: center;
-    height: 100%;
-    max-width: 1440px;
-    margin: 0 auto;
-    padding: 1rem 0;
-    h1 {
-    font-size: 1.4rem;
-    font-weight: 800;
+  &.dark {
+    color: $dark-text;
+    background-color: $dark-background;
+    #nav, button, input, .card, ul {
+      background-color: $dark-elements;
+      color: $dark-text;
+      box-shadow: $dark-box-shadow;
     }
-    .nav-item {
-      align-self: center;
+    input:focus {
+      border: 2px solid $dark-text;
     }
-    a {
-      font-weight: 600;
-      font-size: $home-size;
-      svg {
-        margin-right:0.5rem;
-      }
+    input::placeholder, input:focus, footer p svg {
+      color: $dark-text;
+    }
+    .card ul, .country-info-meta ul {
+      border-radius: none;
+      box-shadow: none;
+      background: transparent;
+    } 
+    li > span {
+      background-color: transparent;
+    }
+    span {
+      background-color: $dark-elements;
+      box-shadow: $dark-box-shadow;
+    }
+    & footer {
+      border-top: 1px solid $light-background;      
     }
   }
 }
-#nav + .container {
-  padding: calc(3rem + 6vh) 0;
-}
-.container {
-  max-width: 1440px;
-  margin: 0 auto;
-  padding-top: 3rem;
-  position: relative;
-}
+
 footer {
   border-top: 1px solid $dark-background;
-  max-width: 1440px;
   padding: 3rem 0;
-  margin: 0 auto;
-  text-align: center;
+  text-align: center;  
   p {
     font-family: $font;
   }
 }
-// Tablet Media Query
-@media screen and (max-width: 1440px) {
-  .container {
-    margin: 0 2rem;
-  }
-  #nav .nav {
-    margin: 0 2rem;
-    h1 {
-      font-size: 1.6rem;
-    }
-    a {
-      font-size: 1rem;
-    }
-  }
-}
 // Mobile Media Query
-@media screen and (max-width: 767px) {
-  .container {
-    margin: 0 2rem;
+@media screen and (max-width: 1024px) {
+  #nav + .container {
+    padding-top: calc(3rem + 6vh);
   }
-  #nav .nav {
-    margin: 0 2rem;
-    h1 {
-      font-size: 1rem;
-    }
-    a {
-      font-size: 0.8rem;
-    }
+  .container {
+    width: 100%;
   }
 }
 </style>

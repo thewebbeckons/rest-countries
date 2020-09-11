@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div>
     <section class="filter-section">
       <div class="filter-item">
         <div class="search">
@@ -8,11 +8,10 @@
         </div>        
       </div>
       <div class="filter-item">
-        <RegionFilter :regions="regions" />
+        <RegionFilter :regions="regions" @filter-region="filterRegion" @remove-filter="removeFilter" />
       </div>
     </section>
-    <div class="loading"></div>
-    <transition-group tag="div" class="country-list" name="list-item" :delay="1000">
+    <transition-group v-if="countryList" tag="div" class="country-list" name="list-item" :delay="1000">
       <CountryCard 
         v-for="country in filteredList" 
         :key="country.name" 
@@ -20,6 +19,9 @@
         @click.native="$router.push({name: 'Country', params: { country: country.name.toLowerCase() } })"
       />
     </transition-group>
+    <section v-else class="loading">
+      <font-awesome-icon  :icon="['fas', 'spinner']" spin size="3x" />
+    </section>
   </div>
 </template>
 
@@ -39,15 +41,23 @@ export default {
     return {
       countryList: null,
       search: null,
-      regions: []
+      regions: [],
+      filter: null
     };
   },
   computed: {
     filteredList () {
-      if (this.search) {
-        return this.countryList.filter(country => country.name.toLowerCase().includes(this.search.toLowerCase()))
+      const countries = this.countryList
+      if (this.search && !this.filter) {
+        return countries.filter(country => country.name.toLowerCase().includes(this.search.toLowerCase()))      
+      } else if (this.filter && !this.search) {
+        return countries.filter(country => country.region.toLowerCase() === this.filter.toLowerCase())
+      } else if (this.search && this.filter) {
+        return countries
+          .filter(country => country.region.toLowerCase() === this.filter.toLowerCase())
+          .filter(country => country.name.toLowerCase().includes(this.search.toLowerCase()))
       } else {
-        return this.countryList
+        return countries
       }
     }
   },
@@ -64,11 +74,28 @@ export default {
         regions = [...new Set(regions)]
         this.regions = regions 
       })
+  },
+  methods: {
+    filterRegion (e) {
+      // add to the filter thing.
+      this.filter = e
+    },
+    removeFilter () {
+      // remove filter
+      this.filter = null
+    }
   }  
 };
 </script>
 
 <style lang="scss">
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  opacity: 0.6;
+}
 .filter-section {
   display: flex;
   flex-direction: row;
@@ -114,8 +141,8 @@ export default {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-rows: auto;
-  column-gap: 4rem;
-  row-gap: 4rem;
+  gap: 4rem;
+  margin-bottom: 4rem;
 }
 // List Transistions
 .list-item {
@@ -139,14 +166,13 @@ export default {
 // Tablet Media Query
 @media screen and (max-width: 1440px) {
   .country-list {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto;
-    column-gap: 4rem;
-    row-gap: 4rem;
+    grid-template-columns: 1fr 1fr 1fr;
   }
 }
-@media screen and (min-width: 487px) and (max-width: 768px) {
+@media screen and (min-width: 487px) and (max-width: 786px) {
+  .country-list {
+    grid-template-columns: 1fr 1fr;
+  }
   .filter-section {
     .filter-item > .search > input {
       width: 33vw;
@@ -157,8 +183,6 @@ export default {
 @media screen and (max-width: 486px) {
   .country-list {
     grid-template-columns: 1fr;
-    column-gap: 3rem;
-    row-gap: 3rem;
   }
   .filter-section {
     .filter-item {
