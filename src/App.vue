@@ -75,4 +75,34 @@ footer {
     font-family: $font;
   }
 }
+// Tablet Media Query
+@media screen and (max-width: 1440px) {
+  .container {
+    margin: 0 2rem;
+  }
+  #nav .nav {
+    margin: 0 2rem;
+    h1 {
+      font-size: 1.6rem;
+    }
+    a {
+      font-size: 1rem;
+    }
+  }
+}
+// Mobile Media Query
+@media screen and (max-width: 767px) {
+  .container {
+    margin: 0 2rem;
+  }
+  #nav .nav {
+    margin: 0 2rem;
+    h1 {
+      font-size: 1rem;
+    }
+    a {
+      font-size: 0.8rem;
+    }
+  }
+}
 </style>

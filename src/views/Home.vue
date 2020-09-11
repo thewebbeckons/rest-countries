@@ -117,6 +117,7 @@ export default {
   column-gap: 4rem;
   row-gap: 4rem;
 }
+// List Transistions
 .list-item-enter-active, 
 .list-item-leave-active {
   transition: opacity 0.3s, transform 0.3s;
@@ -133,6 +134,42 @@ export default {
 
 .list-item-move {
   transition: transform .4s linear .1s;
+}
+// Tablet Media Query
+@media screen and (max-width: 1440px) {
+  .country-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+    column-gap: 4rem;
+    row-gap: 4rem;
+  }
+}
+@media screen and (min-width: 487px) and (max-width: 768px) {
+  .filter-section {
+    .filter-item > .search > input {
+      width: 33vw;
+    }
+  }
+}
+// Mobile Media Query
+@media screen and (max-width: 486px) {
+  .country-list {
+    grid-template-columns: 1fr;
+    column-gap: 3rem;
+    row-gap: 3rem;
+  }
+  .filter-section {
+    .filter-item {
+      flex-grow: 1;
+    }
+    .filter-item > .search > input {
+      width: calc(100% - 6rem);
+    }
+    .filter-item:first-of-type {
+      margin-bottom: 1rem;
+    }
+  }
 }
 
 </style>
