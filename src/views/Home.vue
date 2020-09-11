@@ -11,7 +11,8 @@
         <RegionFilter :regions="regions" />
       </div>
     </section>
-    <transition-group tag="div" class="country-list" name="list-item">
+    <div class="loading"></div>
+    <transition-group tag="div" class="country-list" name="list-item" :delay="1000">
       <CountryCard 
         v-for="country in filteredList" 
         :key="country.name" 
@@ -50,13 +51,12 @@ export default {
       }
     }
   },
-  mounted () {
-    axios
+  async created () {
+    await axios
       .get('https://restcountries.eu/rest/v2/all?fields=name;capital;population;region;flag')
       .then(response => (this.countryList = response.data))
       .then(response => {
         let regions = []
-        console.log(response)
         const countries = response
         countries.map((country) => {
           regions.push(country.region)
@@ -118,23 +118,24 @@ export default {
   row-gap: 4rem;
 }
 // List Transistions
-.list-item-enter-active, 
-.list-item-leave-active {
-  transition: opacity 0.3s, transform 0.3s;
-  transform-origin: left center;
-}
-.list-item-enter, .list-item-leave-to /* .list-leave-active for <2.1.8 */ {
-  opacity: 0;
-  transform: scale(0.5);
+.list-item {
+  &-enter-active,
+  &-leave-active {
+    transition: opacity 0.3s, transform 0.3s;
+    transform-origin: left center;
+  }
+  &-enter,
+  &-leave-to {
+    opacity: 0;
+  }
+  &-leave-active {
+    position: absolute;
+  }
+  &-move {
+    transition: transform .4s linear .1s;
+  }
 }
 
-.list-item-leave-active {
-  position: absolute;
-}
-
-.list-item-move {
-  transition: transform .4s linear .1s;
-}
 // Tablet Media Query
 @media screen and (max-width: 1440px) {
   .country-list {

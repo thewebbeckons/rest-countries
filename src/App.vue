@@ -3,7 +3,7 @@
     <div id="nav">
       <div class="nav">
         <h1 class="nav-item">Where in the world?</h1>
-        <a class="nav-item"><font-awesome-icon :icon="['far', 'moon']" style="margin-right: 1rem;" />Dark Mode</a>
+        <a class="nav-item"><font-awesome-icon :icon="['far', 'moon']" />Dark Mode</a>
       </div>
     </div>
     <router-view/>
@@ -54,6 +54,9 @@
     a {
       font-weight: 600;
       font-size: $home-size;
+      svg {
+        margin-right:0.5rem;
+      }
     }
   }
 }
@@ -64,11 +67,12 @@
   max-width: 1440px;
   margin: 0 auto;
   padding-top: 3rem;
+  position: relative;
 }
 footer {
   border-top: 1px solid $dark-background;
   max-width: 1440px;
-  padding: 1rem 0;
+  padding: 3rem 0;
   margin: 0 auto;
   text-align: center;
   p {

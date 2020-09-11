@@ -14,7 +14,7 @@
 
 <script>
 export default {
-  name: 'CountryCard',
+  name: 'CountryCard', 
   props: {
     country: Object,
   },
@@ -40,22 +40,23 @@ export default {
   font-family: $font;
   box-shadow: $box-shadow;
   cursor: pointer;
-  .card-img {
+  transition: transform 0.25s ease-in-out;  
+  &-img {
     border-top-left-radius: $radius;
     border-top-right-radius: $radius;
     width: 100%;
     height: 200px;
     object-fit: cover;
   }
-  .card-content {
+  &-content {
     padding: 1.6rem;
   }
-  .card-title {
+  &-title {
     font-weight: 800;
     font-size: 1.5rem;
     margin-bottom: 1rem;
   }
-  .card-meta {
+  &-meta {
     font-size: 1rem;
     font-weight: 300;
     list-style-type: none;
@@ -63,5 +64,8 @@ export default {
       padding: 0.2rem 0;
     }   
   }
+}
+.card:hover {
+  transform: translateY(-10px);
 }
 </style>
