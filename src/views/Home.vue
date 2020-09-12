@@ -11,7 +11,7 @@
         <RegionFilter :regions="regions" @filter-region="filterRegion" @remove-filter="removeFilter" />
       </div>
     </div>
-    <transition-group v-if="countryList" tag="div" class="country-list" name="list-item" :delay="1000">
+    <transition-group v-if="countryList" tag="div" class="country-list" name="list-item">
       <CountryCard 
         v-for="country in filteredList" 
         :key="country.name" 
