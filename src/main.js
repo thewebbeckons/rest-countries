@@ -3,15 +3,16 @@ import App from './App.vue';
 import router from './router';
 import Skeleton from 'vue-loading-skeleton'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faChevronDown, faMoon, faHeart, faSearch, faTimes, faArrowLeft, faSpinner } from '@fortawesome/free-solid-svg-icons'
+import { faChevronDown, faChevronUp, faMoon, faHeart, faSearch, faTimes, faArrowLeft, faSpinner, faCircle } from '@fortawesome/free-solid-svg-icons'
 import { faGithub } from '@fortawesome/free-brands-svg-icons'
 import { faMoon as farMoon } from '@fortawesome/free-regular-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { FontAwesomeIcon, FontAwesomeLayers } from '@fortawesome/vue-fontawesome'
 import './assets/variables.scss';
 
-library.add(faChevronDown, faMoon, faGithub, faHeart, farMoon, faSearch, faTimes, faArrowLeft, faSpinner)
+library.add(faChevronDown, faChevronUp, faMoon, faGithub, faHeart, farMoon, faSearch, faTimes, faArrowLeft, faSpinner, faCircle)
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
+Vue.component('font-awesome-layers', FontAwesomeLayers)
 
 Vue.use(Skeleton)
 

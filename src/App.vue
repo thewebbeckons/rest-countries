@@ -7,16 +7,19 @@
         <p>Made with <font-awesome-icon :icon="['fas', 'heart']" style="color: red;" /> in Toronto | Coded by &nbsp;
         <a href="https://github.com/thewebbeckons"><font-awesome-icon :icon="['fab', 'github']" /></a></p>
       </footer>
-    </div>    
+    </div>
+    <GoToTop />    
   </div>
 </template>
 
 <script>
 import Nav from '@/components/Nav.vue'
+import GoToTop from '@/components/GoToTop.vue'
 
 export default {
   components: {
-    Nav
+    Nav,
+    GoToTop
   },
   data () {
     return {

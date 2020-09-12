@@ -183,6 +183,7 @@ export default {
 @media screen and (max-width: 486px) {
   .country-list {
     grid-template-columns: 1fr;
+    gap: 2rem;
   }
   .filter-section {
     .filter-item {
