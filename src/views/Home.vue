@@ -1,6 +1,6 @@
 <template>
   <div>
-    <section class="filter-section">
+    <div class="filter-section">
       <div class="filter-item">
         <div class="search">
           <font-awesome-icon :icon="['fas', 'search']" class="search-icon"/>
@@ -10,7 +10,7 @@
       <div class="filter-item">
         <RegionFilter :regions="regions" @filter-region="filterRegion" @remove-filter="removeFilter" />
       </div>
-    </section>
+    </div>
     <transition-group v-if="countryList" tag="div" class="country-list" name="list-item" :delay="1000">
       <CountryCard 
         v-for="country in filteredList" 
@@ -19,9 +19,9 @@
         @click.native="$router.push({name: 'Country', params: { country: country.name.toLowerCase() } })"
       />
     </transition-group>
-    <section v-else class="loading">
+    <div v-else class="loading">
       <font-awesome-icon  :icon="['fas', 'spinner']" spin size="3x" />
-    </section>
+    </div>
   </div>
 </template>
 

@@ -4,13 +4,13 @@
       <font-awesome-icon :icon="['fas', 'arrow-left']" size="xs" />
       Back
     </button>
-    <section v-if="country" class="country">
+    <div v-if="country" class="country">
       <div class="col country-flag">
         <img  :src="country.flag" :alt="country.name">        
       </div>
       <div class="col country-info">
         <h1 class="country-info-title">{{ country.name }}</h1>
-        <section class="country-info-meta">
+        <div class="country-info-meta">
           <ul>
             <li><b>Native Name:</b> {{ country.nativeName }}</li>
             <li><b>Population:</b> {{ country.population | currency }}</li>
@@ -23,18 +23,18 @@
             <li><b>Currencies:</b> <span v-for="currency in country.currencies" :key="currency.code">{{ currency.name }}</span></li>
             <li><b>Languages:</b> <span v-for="language in country.languages" :key="language.name">{{ language.name }}</span></li>
           </ul>
-        </section>
-        <section v-if="borders" class="country-info-borders">
+        </div>
+        <div v-if="borders" class="country-info-borders">
           <h2>Border Countries:</h2>
           <div class="list">
             <span v-for="border in borders" :key="border.name">{{border.name}}</span>
           </div>
-        </section>
+        </div>
       </div>
-    </section>
-    <section v-else class="loading">
+    </div>
+    <div v-else class="loading">
       <font-awesome-icon  :icon="['fas', 'spinner']" spin size="3x" />
-    </section>
+    </div>
   </div>
 </template>
 
