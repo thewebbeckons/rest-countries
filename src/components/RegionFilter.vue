@@ -1,6 +1,6 @@
 <template>
   <div class="region-filter">
-    <button v-if="!currentRegion" @click="toggle()" id="filter-button" :class="{ active: showList }">
+    <button v-if="!currentRegion" @click.prevent="toggle()" id="filter-button" :class="{ active: showList }">
       Filter by Region <font-awesome-icon :icon="['fas', 'chevron-down']" />
     </button>
     <button v-else @click="removeFilter()">

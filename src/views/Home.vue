@@ -66,8 +66,8 @@ export default {
   },
   async created () {
     // handle focused enter press
-    window.addEventListener('keyup', event => {
-      if (event.isComposing || event.keyCode === 13) {
+    document.addEventListener('keyup', event => {
+      if (event.keyCode === 13) {
         this.handleEnter()
       }
     })
@@ -100,7 +100,7 @@ export default {
       // get element that has focus
       const el = document.getElementsByClassName('card focus-visible')
       // use router push to navigate
-      if (el[0].id) {
+      if (el[0].id !== 'undefined') {
         this.$router.push({name: 'Country', params: { country: el[0].id.toLowerCase() } })
       }
       
