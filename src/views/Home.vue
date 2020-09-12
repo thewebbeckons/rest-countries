@@ -14,7 +14,8 @@
     <transition-group v-if="countryList" tag="div" class="country-list" name="list-item">
       <CountryCard 
         v-for="country in filteredList" 
-        :key="country.name" 
+        :key="country.name"
+        :id="country.name"
         :country="country" 
         @click.native="$router.push({name: 'Country', params: { country: country.name.toLowerCase() } })"
       />
@@ -47,7 +48,9 @@ export default {
   },
   computed: {
     filteredList () {
+      // filter country list
       const countries = this.countryList
+      // handle if search is used, than filter, than both and finally none
       if (this.search && !this.filter) {
         return countries.filter(country => country.name.toLowerCase().includes(this.search.toLowerCase()))      
       } else if (this.filter && !this.search) {
@@ -62,6 +65,13 @@ export default {
     }
   },
   async created () {
+    // handle focused enter press
+    window.addEventListener('keyup', event => {
+      if (event.isComposing || event.keyCode === 13) {
+        this.handleEnter()
+      }
+    })
+    // get country information and region list
     await axios
       .get('https://restcountries.eu/rest/v2/all?fields=name;capital;population;region;flag')
       .then(response => (this.countryList = response.data))
@@ -85,6 +95,15 @@ export default {
     removeFilter () {
       // remove filter
       this.filter = null
+    },
+    handleEnter () {
+      // get element that has focus
+      const el = document.getElementsByClassName('card focus-visible')
+      // use router push to navigate
+      if (el[0].id) {
+        this.$router.push({name: 'Country', params: { country: el[0].id.toLowerCase() } })
+      }
+      
     }
   }  
 };
@@ -120,14 +139,14 @@ export default {
       border: 2px solid transparent;
     }    
     input:focus {
-      border: 2px solid $light-text;
+      border: 2px solid $text-light;
     }
   }
   .search-icon {
     position: absolute;
     top: calc(1rem + 3px);
     left: 1rem;
-    color: $light-text;
+    color: $text-light;
   }
   .regions {
     padding: 1rem 1.6rem 1rem 1rem;

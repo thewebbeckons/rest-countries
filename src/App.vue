@@ -51,7 +51,6 @@ export default {
 * {
   margin: 0;
   padding: 0;
-  outline: none;
   -webkit-box-sizing: border-box; 
   -moz-box-sizing: border-box; 
   box-sizing: border-box;
@@ -72,22 +71,22 @@ export default {
   font-family: 'Nunito Sans', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: $light-text;
-  background-color: $light-background;
+  color: $text-light;
+  background-color: $background-light;
   min-height: 100vh;
   &.dark {
-    color: $dark-text;
-    background-color: $dark-background;    
+    color: $text-dark;
+    background-color: $background-dark;    
     #nav, button, input, .card, ul {
       background-color: $dark-elements;
-      color: $dark-text;
+      color: $text-dark;
       box-shadow: $dark-box-shadow;
     }
     input:focus {
-      border: 2px solid $dark-text;
+      border: 2px solid $text-dark;
     }
     input::placeholder, input:focus, footer p svg, .loading {
-      color: $dark-text;
+      color: $text-dark;
     }
     .card ul, .country-info-meta ul {
       border-radius: none;
@@ -102,13 +101,16 @@ export default {
       box-shadow: $dark-box-shadow;
     }
     & footer {
-      border-top: 1px solid $light-background;      
+      border-top: 1px solid $background-light;
+      a {
+        color: $text-dark;    
+      }   
     }
   }
 }
 
 footer {
-  border-top: 1px solid $dark-background;
+  border-top: 1px solid $background-dark;
   padding: 3rem 0;
   text-align: center;  
   p {

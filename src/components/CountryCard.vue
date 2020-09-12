@@ -1,5 +1,5 @@
 <template>
-  <div class="card">
+  <div class="card" tabindex="0">
     <img :src="country.flag" class="card-img" :alt="`${country.name}-flag`">
     <div class="card-content">
       <h1 class="card-title">{{ country.name }}</h1>

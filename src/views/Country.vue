@@ -1,6 +1,6 @@
 <template>
   <div>
-    <button @click="$router.push({path: '/'})">
+    <button @click="$router.push({path: '/'})" @keyup.enter="$router.push({path: '/'})">
       <font-awesome-icon :icon="['fas', 'arrow-left']" size="xs" />
       Back
     </button>

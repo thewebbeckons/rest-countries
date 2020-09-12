@@ -2,8 +2,8 @@
   <div id="nav">
     <div>
       <h1 class="nav-item">Where in the world?</h1>
-      <a v-if="theme === 'light'" class="nav-item" @click="toggle()"><font-awesome-icon :icon="['far', 'moon']" />Dark Mode</a>
-      <a v-else class="nav-item" @click="toggle()"><font-awesome-icon :icon="['fas', 'moon']" />Light Mode</a>
+      <a v-if="theme === 'light'" class="nav-item" @click="toggle()" tabindex="0"><font-awesome-icon :icon="['far', 'moon']" />Dark Mode</a>
+      <a v-else class="nav-item" @click="toggle()" tabindex="0"><font-awesome-icon :icon="['fas', 'moon']" />Light Mode</a>
     </div>
   </div>
 </template>
