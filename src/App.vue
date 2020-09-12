@@ -5,7 +5,7 @@
       <router-view/>
       <footer>
         <p>Made with <font-awesome-icon :icon="['fas', 'heart']" style="color: red;" /> in Toronto | Coded by &nbsp;
-        <a href="https://github.com/thewebbeckons"><font-awesome-icon :icon="['fab', 'github']" /></a></p>
+        <a href="https://github.com/thewebbeckons">thewebbeckons</a></p>
       </footer>
     </div>
     <GoToTop />    

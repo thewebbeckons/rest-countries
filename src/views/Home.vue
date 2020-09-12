@@ -71,7 +71,9 @@ export default {
         countries.map((country) => {
           regions.push(country.region)
         })
-        regions = [...new Set(regions)]
+        regions = [...new Set(regions)].filter((el) => {
+          return el != ''
+        })
         this.regions = regions 
       })
   },
