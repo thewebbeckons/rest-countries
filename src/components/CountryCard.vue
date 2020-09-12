@@ -1,6 +1,6 @@
 <template>
   <div class="card">
-    <img :src="country.flag" class="card-img">
+    <img :src="country.flag" class="card-img" :alt="`${country.name}-flag`">
     <div class="card-content">
       <h1 class="card-title">{{ country.name }}</h1>
       <ul class="card-meta">

@@ -4,7 +4,7 @@
       <div class="filter-item">
         <div class="search">
           <font-awesome-icon :icon="['fas', 'search']" class="search-icon"/>
-          <input v-model="search" type="text" placeholder="Search for a country..." class="search">
+          <input v-model="search" type="text" placeholder="Search for a country..." class="search" title="search-field">
         </div>        
       </div>
       <div class="filter-item">
