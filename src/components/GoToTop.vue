@@ -50,6 +50,7 @@ export default {
   position: fixed;
   bottom: 10px;
   right: 10px;
+  cursor: pointer;
 }
 // Transition Animation
 .slide-enter-active {
