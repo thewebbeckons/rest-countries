@@ -160,7 +160,7 @@ export default {
 }
 .country-list {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   grid-template-rows: auto;
   gap: 4rem;
   margin-bottom: 4rem;
@@ -184,16 +184,8 @@ export default {
   }
 }
 
-// Tablet Media Query
-@media screen and (max-width: 1440px) {
-  .country-list {
-    grid-template-columns: 1fr 1fr 1fr;
-  }
-}
-@media screen and (min-width: 487px) and (max-width: 786px) {
-  .country-list {
-    grid-template-columns: 1fr 1fr;
-  }
+
+@media screen and (min-width: 487px) and (max-width: 786px) {  
   .filter-section {
     .filter-item > .search > input {
       width: 33vw;
@@ -201,11 +193,7 @@ export default {
   }
 }
 // Mobile Media Query
-@media screen and (max-width: 486px) {
-  .country-list {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
+@media screen and (max-width: 486px) {  
   .filter-section {
     .filter-item {
       flex-grow: 1;
