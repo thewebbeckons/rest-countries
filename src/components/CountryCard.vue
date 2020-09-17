@@ -41,6 +41,7 @@ export default {
   box-shadow: $box-shadow;
   cursor: pointer;
   transition: transform 0.25s ease-in-out;  
+  // max-width: 250px;
   &-img {
     border-top-left-radius: $radius;
     border-top-right-radius: $radius;

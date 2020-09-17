@@ -63,7 +63,7 @@ export default {
 // Tablet Media Query
 @media screen and (max-width: 1440px) {  
   #nav div {
-    padding: 2rem 2rem;
+    padding: 1rem 2rem;
     h1 {
       font-size: 1.6rem;
     }

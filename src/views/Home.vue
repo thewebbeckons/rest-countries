@@ -4,7 +4,7 @@
       <div class="filter-item">
         <div class="search">
           <font-awesome-icon :icon="['fas', 'search']" class="search-icon"/>
-          <input v-model="search" type="text" placeholder="Search for a country..." class="search" title="search-field">
+          <input v-model="search" type="text" placeholder="Search for a country..." class="search" title="search-field" @input="update()">
         </div>        
       </div>
       <div class="filter-item">
@@ -14,10 +14,10 @@
     <transition-group v-if="countryList" tag="div" class="country-list" name="list-item">
       <CountryCard 
         v-for="country in filteredList" 
-        :key="country.name"
+        :key="country.alpha3Code"
         :id="country.name"
         :country="country" 
-        @click.native="$router.push({name: 'Country', params: { country: country.name.toLowerCase() } })"
+        @click.native="$router.push({name: 'Country', params: { country: country.alpha3Code } })"
       />
     </transition-group>
     <div v-else class="loading">
@@ -31,6 +31,7 @@
 import CountryCard from '@/components/CountryCard.vue'
 import RegionFilter from '@/components/RegionFilter.vue'
 import axios from 'axios'
+import _ from 'lodash'
 
 export default {
   name: 'Home',
@@ -73,7 +74,7 @@ export default {
     })
     // get country information and region list
     await axios
-      .get('https://restcountries.eu/rest/v2/all?fields=name;capital;population;region;flag')
+      .get('https://restcountries.eu/rest/v2/all?fields=name;capital;population;region;flag;alpha3Code')
       .then(response => (this.countryList = response.data))
       .then(response => {
         let regions = []
@@ -95,6 +96,11 @@ export default {
     removeFilter () {
       // remove filter
       this.filter = null
+    },
+    update () {
+      _.debounce(function(e) {
+        this.input = e.target.value;
+      }, 300)
     },
     handleEnter () {
       // get element that has focus
@@ -162,8 +168,8 @@ export default {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   grid-template-rows: auto;
-  gap: 4rem;
-  margin-bottom: 4rem;
+  gap: 3rem;
+  margin-bottom: 3rem;
 }
 // List Transistions
 .list-item {

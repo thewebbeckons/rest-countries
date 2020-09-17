@@ -16,6 +16,7 @@
     "axios": "^0.20.0",
     "core-js": "^3.6.5",
     "google-fonts-webpack-plugin": "^0.4.4",
+    "lodash": "^4.17.20",
     "v-hotkey": "^0.8.0",
     "vue": "^2.6.11",
     "vue-loading-skeleton": "^1.1.9",
