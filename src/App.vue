@@ -9,18 +9,18 @@
         <a href="https://github.com/thewebbeckons">thewebbeckons</a></p>
       </footer>
     </div>
-    <GoToTop />    
+    <GoTop :size="40" :right="20" :bottom="20" bg-color="rgba(0,0,0,0.7)" /> 
   </div>
 </template>
 
 <script>
 import Nav from '@/components/Nav.vue'
-import GoToTop from '@/components/GoToTop.vue'
+import GoTop from '@inotom/vue-go-top';
 
 export default {
   components: {
     Nav,
-    GoToTop
+    GoTop
   },
   data () {
     return {
