@@ -4,7 +4,8 @@
     <div class="container">
       <router-view/>
       <footer>
-        <p>Made with <font-awesome-icon :icon="['fas', 'heart']" style="color: red;" /> in Toronto | Coded by &nbsp;
+        <p>Made with <font-awesome-icon :icon="['fas', 'heart']" style="color: red;" /> in Toronto | 
+        Project from <a href="https://www.frontendmentor.io/challenges/rest-countries-api-with-color-theme-switcher-5cacc469fec04111f7b848ca">Frontend Mentor</a> | Coded by &nbsp;
         <a href="https://github.com/thewebbeckons">thewebbeckons</a></p>
       </footer>
     </div>
