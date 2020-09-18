@@ -15,7 +15,7 @@
         </div>        
       </div>
       <div class="filter-item">
-        <RegionFilter :regions="regions" @filter-region="filterRegion" @remove-filter="removeFilter" />
+        <RegionFilter @filter-region="filterRegion" @remove-filter="removeFilter" />
       </div>
     </div>    
     <div v-if="countryList" class="country-list">
