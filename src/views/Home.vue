@@ -17,8 +17,8 @@
       <div class="filter-item">
         <RegionFilter :regions="regions" @filter-region="filterRegion" @remove-filter="removeFilter" />
       </div>
-    </div>
-    <transition-group v-if="countryList" tag="div" class="country-list" name="list-item">
+    </div>    
+    <div v-if="countryList" class="country-list">
       <CountryCard 
         v-for="country in filteredList" 
         :key="country.alpha3Code"
@@ -26,7 +26,7 @@
         :country="country" 
         @click.native="$router.push({name: 'Country', params: { country: country.alpha3Code } })"
       />
-    </transition-group>
+    </div>    
     <div v-else class="loading">
       <font-awesome-icon  :icon="['fas', 'spinner']" spin size="3x" />
     </div>
@@ -59,7 +59,7 @@ export default {
       countryList: null,
       search: null,
       regions: [],
-      filter: null
+      filter: null,
     };
   },
   computed: {
@@ -67,19 +67,17 @@ export default {
       return this.$store.state.keyboard
     },
     filteredList () {
-      // filter country list
-      const countries = this.countryList
       // handle if search is used, than filter, than both and finally none
       if (this.search && !this.filter) {
-        return countries.filter(country => country.name.toLowerCase().includes(this.search.toLowerCase()))      
+        return this.countryList.filter(country => country.name.toLowerCase().includes(this.search.toLowerCase()))      
       } else if (this.filter && !this.search) {
-        return countries.filter(country => country.region.toLowerCase() === this.filter.toLowerCase())
+        return this.countryList.filter(country => country.region.toLowerCase() === this.filter.toLowerCase())
       } else if (this.search && this.filter) {
-        return countries
+        return this.countryList
           .filter(country => country.region.toLowerCase() === this.filter.toLowerCase())
           .filter(country => country.name.toLowerCase().includes(this.search.toLowerCase()))
       } else {
-        return countries
+        return this.countryList
       }
     }
   },
@@ -90,27 +88,15 @@ export default {
         this.handleEnter()
       }
     })
-    
     // get country information and region list
     await axios
       .get('https://restcountries.eu/rest/v2/all?fields=name;capital;population;region;flag;alpha3Code')
-      .then(response => (this.countryList = response.data))
-      .then(response => {
-        let regions = []
-        const countries = response
-        countries.map((country) => {
-          regions.push(country.region)
-        })
-        regions = [...new Set(regions)].filter((el) => {
-          return el != ''
-        })
-        this.regions = regions 
-      })
+      .then(response => (this.countryList = response.data))   
   },
   methods: {
-    filterRegion (e) {
+    filterRegion (region) {
       // add to the filter thing.
-      this.filter = e
+      this.filter = region
     },
     removeFilter () {
       // remove filter
@@ -118,8 +104,8 @@ export default {
     },
     update () {
       _.debounce(function(e) {
-        this.input = e.target.value;
-      }, 500)
+        this.search = e.target.value;
+      }, 1000)
     },
     handleEnter () {
       // get element that has focus
@@ -199,23 +185,23 @@ export default {
   margin-bottom: 3rem;
 }
 // List Transistions
-.list-item {
-  &-enter-active,
-  &-leave-active {
-    transition: opacity 0.3s, transform 0.3s;
-    transform-origin: left center;
-  }
-  &-enter,
-  &-leave-to {
-    opacity: 0;
-  }
-  &-leave-active {
-    position: absolute;
-  }
-  &-move {
-    transition: transform .4s linear .1s;
-  }
-}
+// .list-item {
+//   &-enter-active,
+//   &-leave-active {
+//     transition: opacity 0.3s, transform 0.3s;
+//     transform-origin: left center;
+//   }
+//   &-enter,
+//   &-leave-to {
+//     opacity: 0;
+//   }
+//   &-leave-active {
+//     position: absolute;
+//   }
+//   &-move {
+//     transition: transform .4s linear .1s;
+//   }
+// }
 
 .keyboard-drawer {
   position: fixed;

@@ -11,6 +11,7 @@ import { faMoon as farMoon, faKeyboard as farKeyboard } from '@fortawesome/free-
 import { FontAwesomeIcon, FontAwesomeLayers } from '@fortawesome/vue-fontawesome'
 import './assets/variables.scss';
 
+
 library.add(faChevronDown, faChevronUp, faMoon, faGithub, faHeart, farMoon, faSearch, faTimes, faArrowLeft, faSpinner, faCircle, farKeyboard, faKeyboard)
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)

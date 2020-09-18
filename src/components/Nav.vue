@@ -88,8 +88,8 @@ export default {
       svg {
         margin-right:0.5rem;
       }
-      &:first-of-type {
-        margin-right: 1rem;
+      & + button {
+        margin-left: 1rem;
       }
     }
   }
@@ -109,14 +109,14 @@ export default {
 // Mobile Media Query
 @media screen and (max-width: 1024px) {  
   #nav div {
-    padding: 1rem 0.5rem;
+    padding: 0.5rem 0.5rem;
     h1 {
       font-size: 1rem;
     }
     button {
       font-size: 0.8rem;
-      &:first-of-type {
-        margin-right: 0.5rem;
+      + button {
+        margin-left: 0.5rem;
       }
     }
   }

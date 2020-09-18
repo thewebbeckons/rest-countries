@@ -23,14 +23,12 @@
 
 <script>
 export default {
-  name: 'RegionFilter',
-  props: {
-    regions: Array,
-  },
+  name: 'RegionFilter',  
   data () {
     return {
       showList: false,
-      currentRegion: null
+      currentRegion: null,
+      regions: ['Africa', 'Americas', 'Asia', 'Europe', 'Oceania', 'Polar']
     }
   },
   mounted () {
