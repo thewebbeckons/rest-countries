@@ -2,7 +2,6 @@ import Vue from 'vue';
 import App from './App.vue';
 import router from './router';
 import Vuex from 'vuex'
-import Skeleton from 'vue-loading-skeleton'
 import VueHotkey from 'v-hotkey'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faChevronDown, faChevronUp, faMoon, faHeart, faSearch, faTimes, faArrowLeft, faSpinner, faCircle, faKeyboard } from '@fortawesome/free-solid-svg-icons'
@@ -17,7 +16,6 @@ library.add(faChevronDown, faChevronUp, faMoon, faGithub, faHeart, farMoon, faSe
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 Vue.component('font-awesome-layers', FontAwesomeLayers)
 
-Vue.use(Skeleton)
 Vue.use(VueHotkey)
 Vue.use(Vuex)
 
