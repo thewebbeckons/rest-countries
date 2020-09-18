@@ -78,6 +78,7 @@ export default {
   color: $text-light;
   background-color: $background-light;
   min-height: 100vh;
+  overflow-x: hidden;
   &.dark {
     color: $text-dark;
     background-color: $background-dark;    
