@@ -109,7 +109,7 @@ export default {
 // Mobile Media Query
 @media screen and (max-width: 1024px) {  
   #nav div {
-    padding: 0.5rem 0.5rem;
+    padding: 0.75rem 0.5rem;
     h1 {
       font-size: 1rem;
     }
