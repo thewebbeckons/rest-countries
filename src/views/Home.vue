@@ -4,7 +4,14 @@
       <div class="filter-item">
         <div class="search">
           <font-awesome-icon :icon="['fas', 'search']" class="search-icon"/>
-          <input v-model="search" type="text" placeholder="Search for a country..." class="search" title="search-field" @input="update()">
+          <input 
+            v-model="search" 
+            type="text" 
+            placeholder="Search for a country..." 
+            class="search"
+            title="search-field" 
+            @input="update()"
+          >
         </div>        
       </div>
       <div class="filter-item">
@@ -23,6 +30,12 @@
     <div v-else class="loading">
       <font-awesome-icon  :icon="['fas', 'spinner']" spin size="3x" />
     </div>
+    <transition tag="div" name="slide">
+      <div v-show="keyboard" class="keyboard-drawer">
+        <button @click="toggleKeyboard()"><font-awesome-icon :icon="['fas', 'times']" />Close</button>
+        <SimpleKeyboard @onChange="onChange" @onKeyPress="onKeyPress" :input="search" />
+      </div>      
+    </transition>
   </div>
 </template>
 
@@ -30,6 +43,7 @@
 // @ is an alias to /src
 import CountryCard from '@/components/CountryCard.vue'
 import RegionFilter from '@/components/RegionFilter.vue'
+import SimpleKeyboard from '@/components/SimpleKeyboard.vue'
 import axios from 'axios'
 import _ from 'lodash'
 
@@ -37,7 +51,8 @@ export default {
   name: 'Home',
   components: {
     CountryCard,
-    RegionFilter
+    RegionFilter,
+    SimpleKeyboard
   },
   data() {
     return {
@@ -48,6 +63,9 @@ export default {
     };
   },
   computed: {
+    keyboard () {
+      return this.$store.state.keyboard
+    },
     filteredList () {
       // filter country list
       const countries = this.countryList
@@ -72,6 +90,7 @@ export default {
         this.handleEnter()
       }
     })
+    
     // get country information and region list
     await axios
       .get('https://restcountries.eu/rest/v2/all?fields=name;capital;population;region;flag;alpha3Code')
@@ -100,7 +119,7 @@ export default {
     update () {
       _.debounce(function(e) {
         this.input = e.target.value;
-      }, 300)
+      }, 500)
     },
     handleEnter () {
       // get element that has focus
@@ -108,8 +127,16 @@ export default {
       // use router push to navigate
       if (el[0].id !== 'undefined') {
         this.$router.push({name: 'Country', params: { country: el[0].id.toLowerCase() } })
-      }
-      
+      }      
+    },
+    toggleKeyboard () {      
+      this.$store.state.keyboard = !this.$store.state.keyboard
+    },
+    onChange(input) {
+      this.search = input;
+    },
+    onKeyPress(button) {
+      console.log("button", button);
     }
   }  
 };
@@ -190,11 +217,45 @@ export default {
   }
 }
 
+.keyboard-drawer {
+  position: fixed;
+  bottom:0;
+  left:0;
+  width: 100%;
+  height: 50vh;
+  padding:2rem;
+  align-items: center;
+  background-color: rgb(255,255,255);
+  & button {
+    display: block;
+    float: right;
+    text-align: center;
+    background-color: transparent;
+    border: none;
+    padding: 0.5rem;
+    font-size: 1rem;
+    & svg {
+      margin-right: 0.5rem;
+    }
+  }
+}
 
-@media screen and (min-width: 487px) and (max-width: 786px) {  
+.slide-enter-active, .slide-leave-active {
+  transition: margin-bottom .8s ease-out;
+}
+
+.slide-enter, .slide-leave-to {
+  margin-bottom: -200px;
+}
+
+.slide-enter-to, .slide-leave {
+  margin-bottom: 0px;
+}
+
+@media screen and (min-width: 487px) and (max-width: 1024px) {  
   .filter-section {
     .filter-item > .search > input {
-      width: 33vw;
+      width: 45vw;
     }
   }
 }
@@ -203,9 +264,10 @@ export default {
   .filter-section {
     .filter-item {
       flex-grow: 1;
+      width: 100%;
     }
     .filter-item > .search > input {
-      width: calc(100% - 6rem);
+      width: calc(100% - 2rem);
     }
     .filter-item:first-of-type {
       margin-bottom: 1rem;

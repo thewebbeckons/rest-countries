@@ -1,6 +1,6 @@
 <template>
   <div id="app" :class="{dark: theme === 'dark'}">
-    <Nav :theme="theme" @toggle-theme="toggleTheme" />
+    <Nav :theme="theme" @toggle-theme="toggleTheme" @show-keyboard="toggleKeyboard" />
     <div class="container">
       <router-view/>
       <footer>
@@ -9,7 +9,7 @@
         <a href="https://github.com/thewebbeckons">thewebbeckons</a></p>
       </footer>
     </div>
-    <GoTop :size="40" :right="20" :bottom="20" bg-color="rgba(0,0,0,0.7)" /> 
+    <GoTop :size="40" :right="20" :bottom="20" bg-color="rgba(0,0,0,0.7)" />        
   </div>
 </template>
 
@@ -43,6 +43,9 @@ export default {
         this.theme = 'light'
         localStorage.theme = this.theme
       }
+    },
+    toggleKeyboard () {
+      this.$store.commit('toggle')
     }
   }
 }
@@ -118,6 +121,8 @@ footer {
     font-family: $font;
   }
 }
+
+
 // Mobile Media Query
 @media screen and (max-width: 1024px) {
   #nav + .container {
