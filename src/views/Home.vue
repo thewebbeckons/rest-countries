@@ -90,7 +90,7 @@ export default {
     })
     // get country information and region list
     await axios
-      .get('https://restcountries.eu/rest/v2/all?fields=name;capital;population;region;flag;alpha3Code')
+      .get('https://restcountries.com/v3.1/all?fields=name;capital;population;region;flag;alpha3Code')
       .then(response => (this.countryList = response.data))   
   },
   methods: {
